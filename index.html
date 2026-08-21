@@ -678,8 +678,8 @@
       right: 3vw;
       bottom: 2.2vh;
       display: flex;
-      gap: 8px;
-      z-index: 10;
+      gap: 10px;
+      z-index: 100;
     }
     .nav button {
       appearance: none;
@@ -687,19 +687,21 @@
       background: #102342;
       color: #dbe8ff;
       border-radius: 50%;
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
       cursor: pointer;
       font-size: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: all .15s ease;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.4);
     }
     .nav button:hover, .nav button:focus {
       border-color: var(--cyan);
       outline: none;
       background: #18335e;
+      transform: scale(1.05);
     }
     .progress {
       position: fixed;
@@ -708,23 +710,182 @@
       height: 4px;
       background: linear-gradient(90deg, var(--cyan), var(--blue));
       transition: width .28s ease;
-      z-index: 10;
+      z-index: 100;
     }
     @keyframes fade {
       from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: none; }
     }
 
-    @media (max-aspect-ratio: 3/2) {
-      body { overflow: auto; }
-      .deck { min-height: 100vh; height: auto; }
-      .slide { min-height: 100vh; height: auto; padding: 42px 36px 80px; overflow: visible; }
-      .brand { top: 20px; right: 36px; }
-      .footer { position: static; margin-top: 24px; }
-      .feature-grid, .tech, .screen-layout, .privacy { grid-template-columns: 1fr; gap: 20px; height: auto; }
-      .process { grid-template-columns: 1fr; gap: 8px; margin-top: 24px; }
-      .arrow { transform: rotate(90deg); padding: 0; text-align: left; }
-      .nav { right: 16px; bottom: 14px; }
+    /* Mobil ve Tablet Uyumluluğu */
+    @media (max-width: 960px), (max-aspect-ratio: 4/3) {
+      body {
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+      .deck {
+        min-height: 100vh;
+        height: auto;
+      }
+      .slide {
+        min-height: 100vh;
+        height: auto;
+        padding: 24px 20px 96px;
+        overflow: visible;
+      }
+      .slide.active {
+        display: flex;
+        flex-direction: column;
+      }
+      .slide::before {
+        width: 80vw;
+        height: 80vw;
+        right: -30vw;
+        top: -30vw;
+      }
+      .brand {
+        position: static;
+        margin-bottom: 20px;
+        justify-content: flex-start;
+        font-size: 14px;
+        gap: 10px;
+      }
+      .brand img {
+        width: 34px;
+        height: 34px;
+      }
+      .eyebrow {
+        font-size: clamp(11px, 3.2vw, 13px);
+        margin-bottom: 12px;
+      }
+      h1 {
+        font-size: clamp(26px, 7vw, 42px);
+        line-height: 1.15;
+      }
+      h2 {
+        font-size: clamp(22px, 5.8vw, 32px);
+        line-height: 1.18;
+        margin-bottom: 14px;
+      }
+      .lead {
+        font-size: clamp(14.5px, 4vw, 17.5px);
+        line-height: 1.5;
+        margin-top: 10px;
+      }
+      .screen-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        height: auto;
+      }
+      .screen-frame {
+        width: 100%;
+      }
+      .feature-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-top: 16px;
+      }
+      .feature {
+        padding: 16px 18px;
+      }
+      .feature b {
+        font-size: 17px;
+      }
+      .feature p {
+        font-size: 13.5px;
+      }
+      .tech {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        margin-top: 18px;
+      }
+      .privacy {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        height: auto;
+      }
+      .lock {
+        width: 170px;
+        height: 170px;
+      }
+      .process {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-top: 18px;
+      }
+      .process .step {
+        padding-top: 10px;
+        padding-bottom: 4px;
+      }
+      .arrow {
+        transform: rotate(90deg);
+        padding: 0 0 0 10px;
+        font-size: 20px;
+        text-align: left;
+      }
+      .footer {
+        position: static;
+        margin-top: 36px;
+        padding-right: 0;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        font-size: 12px;
+      }
+      .nav {
+        right: 16px;
+        bottom: 16px;
+      }
+      .nav button {
+        width: 44px;
+        height: 44px;
+        font-size: 22px;
+      }
+      .anon-compare {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 12px;
+      }
+      .ocr-body {
+        grid-template-columns: 1fr;
+      }
+      .paper {
+        margin: 10px;
+        padding: 12px;
+      }
+      .app-transcript-body {
+        max-height: 240px;
+        min-height: auto;
+      }
+      .t-segment {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        padding: 10px 12px;
+      }
+      .t-segment .t-time {
+        font-size: 11px;
+      }
+      .t-segment .t-spk {
+        font-size: 13px;
+      }
+      .t-segment .t-text {
+        font-size: 13.5px;
+      }
+      .app-sync-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      .sync-controls-row {
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .batch-item-demo {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
     }
   </style>
 </head>
